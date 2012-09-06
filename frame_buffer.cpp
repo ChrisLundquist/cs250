@@ -29,7 +29,7 @@ void FrameBuffer::Init(const unsigned int &w, const unsigned int &h)
 {
 	width = w;
 	height = h;
-	buffer = new unsigned char [width * height * 3];
+	buffer = new unsigned char [width * height * 3 + 3]; // XXX FIXME
 
 	Clear(255, 255, 255);
 }

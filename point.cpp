@@ -13,3 +13,7 @@ Point::Point(int x, int y) {
     z = 0;
     t = 0;
 }
+
+Point Point::operator-(Point& rhs) {
+    return Point(x - rhs.x, y - rhs.y);
+}
