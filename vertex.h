@@ -1,5 +1,9 @@
+#include "color.h"
+#include "point.h"
+
 struct Vertex {
-    int x,y,z;
     Vertex();
-    Vertex(int,int);
+    Vertex(Point, Color);
+    Color color;
+    Point point;
 };
