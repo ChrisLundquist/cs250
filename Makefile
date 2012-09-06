@@ -1,5 +1,5 @@
 #VPATH= src:test
-CFLAGS= -Wall -Wextra -pedantic
+CFLAGS= -Wall -Wextra -pedantic -g
 CXX=g++
 TEST_LIBS=-lgtest -lgtest_main
 LIBS= -lGLEW
@@ -32,5 +32,5 @@ clean:
 	rm -rf $(OBJECT_FILES) $(OBJECT_SPEC_FILES) $(APP)
 
 .cpp.o:
-	$(CXX) -g -c $(CFLAGS) $< -o $@
+	$(CXX) -c $(CFLAGS) $< -o $@
 
