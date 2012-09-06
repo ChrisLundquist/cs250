@@ -23,18 +23,18 @@ static float barything(Point edge, Point test) {
 
 // FIXME
 bool Triangle::includes(Point& point) {
-    Point e1 = edgify(b.point,c.point);
-    Point e2 = edgify(c.point,a.point);
-    Point e3 = edgify(a.point,b.point);
+    Point e1 = edgify(b.point, c.point);
+    Point e2 = edgify(c.point, a.point);
+    Point e3 = edgify(a.point, b.point);
 
     float alpha = barything(e1, point) / barything(e1, a.point);
     float beta = barything(e2, point) / barything(e2, b.point);
     float gamma = barything(e2, point) / barything(e2, c.point);
 
     return \
-        0 <= alpha && alpha <= 1 and
-        0 <= beta && beta <= 1 and
-        0 <= gamma && gamma <= 1;
+        alpha > 0 and
+        beta > 0 and
+        gamma > 0;
 }
 
 // FIXME
@@ -49,57 +49,66 @@ void Triangle::barycentric(FrameBuffer& buffer){
 }
 
 void Triangle::render(FrameBuffer& buffer) {
-    barycentric(buffer);
+    scanline(buffer);
 }
 
 
-//static void scanline(FrameBuffer& buffer) {
-//    Vertex top, bottom, middle;
-//
-//    top    = this->top();
-//    middle = this->middle();
-//    bottom = this->bottom();
-//
-//    Line(top,middle).render(buffer);
-//    Line(top,bottom).render(buffer);
-//    Line(middle,bottom).render(buffer);
-//
-//    if(top.point.y - bottom.point.y == 0)
-//      return; //TODO flat triangles?
-//}
+void Triangle::scanline(FrameBuffer& buffer) {
+    Vertex top, bottom, middle, left, right;
+
+    top    = this->top();
+    middle = this->middle();
+    bottom = this->bottom();
+    left   = top;
+    right  = top;
+
+    Point e1 = (bottom.point - top.point).normalize();
+    Point e2 = (middle.point - top.point).normalize();
+    Point e3 = (bottom.point - middle.point).normalize();
+
+    if(top.point.y - bottom.point.y == 0)
+        return; //TODO flat triangles?
+
+    // Top half
+    while( left.point.y < middle.point.y){
+        Line(left, right).render(buffer);
+        left.point += e1;
+        right.point += e2;
+    }
+}
 
 
-//Vertex& Triangle::top() {
-//  if(a.point.y > b.point.y and a.point.y > c.point.y)
-//    return a;
-//  else if(b.point.y > a.point.y and b.point.y > c.point.y)
-//    return b;
-//  else if(c.point.y >= a.point.y and c.point.y >= b.point.y)
-//    return c;
-//  else
-//    return a;
-//}
-//
-//Vertex& Triangle::bottom() {
-//  if(a.point.y < b.point.y and a.point.y < c.point.y)
-//    return a;
-//  else if(b.point.y < a.point.y and b.point.y < c.point.y)
-//    return b;
-//  else if(c.point.y <= a.point.y and c.point.y <= b.point.y)
-//    return c;
-//  else
-//    return a;
-//}
-//
-//Vertex& Triangle::middle() {
-//  if(a.point.y < b.point.y and a.point.y > c.point.y)
-//    return a;
-//  else if(b.point.y < a.point.y and b.point.y > c.point.y)
-//    return b;
-//  else if(c.point.y <= a.point.y and c.point.y >= b.point.y)
-//    return c;
-//  else
-//    return a;
-//}
+Vertex& Triangle::top() {
+  if(a.point.y > b.point.y and a.point.y > c.point.y)
+    return a;
+  else if(b.point.y > a.point.y and b.point.y > c.point.y)
+    return b;
+  else if(c.point.y >= a.point.y and c.point.y >= b.point.y)
+    return c;
+  else
+    return a;
+}
+
+Vertex& Triangle::bottom() {
+  if(a.point.y < b.point.y and a.point.y < c.point.y)
+    return a;
+  else if(b.point.y < a.point.y and b.point.y < c.point.y)
+    return b;
+  else if(c.point.y <= a.point.y and c.point.y <= b.point.y)
+    return c;
+  else
+    return a;
+}
+
+Vertex& Triangle::middle() {
+  if(a.point.y < b.point.y and a.point.y > c.point.y)
+    return a;
+  else if(b.point.y < a.point.y and b.point.y > c.point.y)
+    return b;
+  else if(c.point.y <= a.point.y and c.point.y >= b.point.y)
+    return c;
+  else
+    return a;
+}
 
 

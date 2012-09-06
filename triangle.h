@@ -5,9 +5,10 @@ struct Triangle {
     Triangle(Vertex, Vertex, Vertex);
     void render(FrameBuffer&);
     bool includes(Point&);
+    Vertex& top();
+    Vertex& bottom();
+    Vertex& middle();
 private:
     void barycentric(FrameBuffer&);
-    //Vertex& top();
-    //Vertex& bottom();
-    //Vertex& middle();
+    void scanline(FrameBuffer&);
 };
