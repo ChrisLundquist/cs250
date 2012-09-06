@@ -29,8 +29,8 @@ void mouse(int button, int state, int x, int y)
 {
     switch (button)
     {
-    default:
-    std::cout << "Unhandled input: Button" << button << "State: " << state << " X: " << x << "Y: " << y << std::endl;
+        default:
+            std::cout << "Unhandled input: Button" << button << "State: " << state << " X: " << x << "Y: " << y << std::endl;
     }
 }
 
