@@ -1,15 +1,13 @@
 #include "frame_buffer.h"
 
-unsigned char *FrameBuffer::buffer = NULL;
-int FrameBuffer::width = 0;
-int FrameBuffer::height = 0;
-
-FrameBuffer::FrameBuffer()
+FrameBuffer::FrameBuffer(const unsigned &width, const unsigned &height)
 {
+    Init(width,height);
 }
 
 FrameBuffer::~FrameBuffer()
 {
+    delete[] buffer;
 }
 
 //Clears the frame buffer to the given (r, g, b) color

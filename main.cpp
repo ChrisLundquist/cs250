@@ -7,7 +7,8 @@
 #define VK_ESCAPE 27
 #endif
 
-int winID;
+static int winID;
+static FrameBuffer frame(WIDTH, HEIGHT);
 
 void keyboard(unsigned char key, int x, int y)
 {
@@ -43,18 +44,16 @@ void loop(void)
 
 void render(void)
 {
-    FrameBuffer::Clear(255, 255, 255);
+    frame.Clear(255, 255, 255);
 
     //Put your rendering code here
 
-    glDrawPixels(WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, FrameBuffer::buffer);
+    glDrawPixels(WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, frame.buffer);
     glutSwapBuffers();
 }
 
 void init(void)
 {
-    FrameBuffer::Init(WIDTH, HEIGHT);
-
     //Initialize everything here
 }
 
@@ -77,8 +76,6 @@ int main (int argc, char **argv)
     init();
 
     glutMainLoop();
-
-    delete [] FrameBuffer::buffer;
 
     return 0;
 }

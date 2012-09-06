@@ -11,16 +11,16 @@
 class FrameBuffer
 {
     public:
-        FrameBuffer();
+        FrameBuffer(const unsigned &width, const unsigned &height);
         ~FrameBuffer();
 
-        static void Clear(const unsigned char &r, const unsigned char &g, const unsigned char &b);
+        void Clear(const unsigned char &r, const unsigned char &g, const unsigned char &b);
 
-        static void Init(const unsigned int &w, const unsigned int &h);
-        static void SetPixel(const int &x, const int &y, const unsigned char &r, const unsigned char &g, const unsigned char &b);
-        static void GetPixel(const int &x, const int &y, unsigned char &r, unsigned char &g, unsigned char &b);
+        void Init(const unsigned int &w, const unsigned int &h);
+        void SetPixel(const int &x, const int &y, const unsigned char &r, const unsigned char &g, const unsigned char &b);
+        void GetPixel(const int &x, const int &y, unsigned char &r, unsigned char &g, unsigned char &b);
 
-        static unsigned char *buffer;
-        static int width;
-        static int height;
+        unsigned char *buffer;
+        int width;
+        int height;
 };
