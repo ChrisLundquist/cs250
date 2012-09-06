@@ -18,7 +18,7 @@ APP = Assignment
 #valgrind: test
 #	valgrind --leak-check=yes ./tests
 
-models: frame_buffer.o main.o vertex.o color.o point.o
+models: frame_buffer.o main.o vertex.o color.o point.o line.o triangle.o
 
 all: models
 
