@@ -20,7 +20,7 @@ void Line::render(FrameBuffer& buffer) {
         tmp.render(buffer);
         done = tmp.point.x == b.point.x and tmp.point.y == b.point.y;
 
-        int e2 = 2*err;
+        int e2 = 2 * err;
 
         if(e2 > -dy) {
             err -= dy;

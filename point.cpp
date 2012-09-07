@@ -37,3 +37,8 @@ Point& Point::operator+=(Point& rhs) {
     y += rhs.y;
     return *this;
 }
+
+std::ostream& operator<<(std::ostream& os, const Point& point) {
+    os << "X: " << point.x << " Y: " << point.y << std::endl;
+    return os;
+}

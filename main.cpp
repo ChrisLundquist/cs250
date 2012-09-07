@@ -133,6 +133,8 @@ int main (int argc, char **argv)
 
     init();
 
+//    render();
+
     glutMainLoop();
 
     return 0;

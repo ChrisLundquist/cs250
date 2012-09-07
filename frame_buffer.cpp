@@ -29,7 +29,7 @@ void FrameBuffer::Init(const unsigned int &w, const unsigned int &h)
 {
 	width = w;
 	height = h;
-	buffer = new unsigned char [width * height * 3 + 3]; // XXX FIXME
+	buffer = new unsigned char [width * height * 3 ]; // XXX FIXME
 
 	Clear(255, 255, 255);
 }
@@ -39,7 +39,7 @@ void FrameBuffer::SetPixel(const int &x, const int &y, const unsigned char &r, c
 {
 	int _y = height - y;
 
-	if (x < 0 || x > width || _y < 0 || _y > height)
+	if (x < 0 || x > width || _y < 0 || _y >= height)
 		return;
 
 	buffer[x * 3 + _y * width * 3] = r;
@@ -52,7 +52,7 @@ void FrameBuffer::GetPixel(const int &x, const int &y, unsigned char &r, unsigne
 {
 	int _y = height - y;
 
-	if (x < 0 || x > width || _y < 0 || _y > height)
+	if (x < 0 || x > width || _y < 0 || _y >= height)
 		return;
 
 	r = buffer[x * 3 + _y * width * 3];

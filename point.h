@@ -1,3 +1,4 @@
+#include <iostream>
 struct Point {
     Point();
     Point(int,int);
@@ -7,4 +8,5 @@ struct Point {
     Point& operator+=(Point&);
     float length();
     Point normalize();
+    friend std::ostream& operator<<(std::ostream&, const Point& );
 };
