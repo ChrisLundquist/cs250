@@ -6,16 +6,17 @@ Triangle::Triangle(Vertex a, Vertex b, Vertex c){
     this->c = c;
 }
 
-static Point cross_product(Point a, Point b) {
+static Point cross_product(Point& a, Point& b) {
     Point p;
     p.x = a.y - b.y;
     p.y = b.x - a.x;
-    p.z = a.x * b.y - b.x * a.y;
+    //p.z = a.x * b.y - b.x * a.y;
+    p.z = -0.5f * (p.x * (a.x + b.x) + p.y * (a.y + b.y));
 
     return p;
 }
 
-static float barything(Point edge, Point test) {
+static float barything(Point& edge, Point& test) {
     return test.x * edge.x + test.y * edge.y + edge.z;
 }
 
@@ -35,7 +36,7 @@ float Triangle::gamma(Point& test) {
 }
 
 bool Triangle::includes(Point& point) {
-    return alpha(point) > 0 and beta(point) > 0 and gamma(point) > 0;
+    return alpha(point) >= 0 and beta(point) >= 0 and gamma(point) >= 0;
 }
 
 void Triangle::barycentric(FrameBuffer& buffer){
