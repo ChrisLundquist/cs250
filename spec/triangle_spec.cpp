@@ -1,12 +1,60 @@
 #include <gtest/gtest.h>
 #include "../triangle.h"
 
+static Color red() {
+    return Color(255, 0, 0);
+}
+
+static Vertex vertex_a() {
+    return Vertex(Point(100, 0), red());
+}
+
+static Vertex vertex_b() {
+    return Vertex(Point(400, 100), red());
+}
+
+static Vertex vertex_c() {
+    return Vertex(Point(200, 300), red());
+}
+
 static Triangle test_triangle() {
-    Color red = Color(255, 0 ,0);
-    Vertex a = Vertex(Point(100, 0), red);
-    Vertex b = Vertex(Point(400, 100), red);
-    Vertex c = Vertex(Point(200, 300), red);
+    Vertex a = vertex_a();
+    Vertex b = vertex_b();
+    Vertex c = vertex_c();
     return Triangle(a, b, c);
+}
+
+TEST(Triangle, Alpha) {
+    Triangle triangle = test_triangle();
+    Vertex a = vertex_a();
+    Vertex b = vertex_b();
+    Vertex c = vertex_c();
+
+    EXPECT_EQ(triangle.alpha(a.point), 1.0);
+    EXPECT_EQ(triangle.alpha(b.point), 0);
+    EXPECT_EQ(triangle.alpha(c.point), 0);
+}
+
+TEST(Triangle, Beta) {
+    Triangle triangle = test_triangle();
+    Vertex a = vertex_a();
+    Vertex b = vertex_b();
+    Vertex c = vertex_c();
+
+    EXPECT_EQ(triangle.beta(a.point), 0);
+    EXPECT_EQ(triangle.beta(b.point), 1.0);
+    EXPECT_EQ(triangle.beta(c.point), 0);
+}
+
+TEST(Triangle, Gamma) {
+    Triangle triangle = test_triangle();
+    Vertex a = vertex_a();
+    Vertex b = vertex_b();
+    Vertex c = vertex_c();
+
+    EXPECT_EQ(triangle.gamma(a.point), 0);
+    EXPECT_EQ(triangle.gamma(b.point), 0);
+    EXPECT_EQ(triangle.gamma(c.point), 1.0);
 }
 
 TEST(Triangle, DoesInclude) {

@@ -24,15 +24,19 @@ Point Point::normalize() {
     return Point( x / length, y / length);
 }
 
-Point Point::operator-(Point& rhs) {
+Point Point::operator-(const Point& rhs) {
     return Point(x - rhs.x, y - rhs.y);
 }
 
-Point Point::operator+(Point& rhs) {
+Point Point::operator+(const Point& rhs) {
     return Point(x + rhs.x, y + rhs.y);
 }
 
-Point& Point::operator+=(Point& rhs) {
+bool Point::operator==(const Point& rhs) {
+    return x == rhs.x and y == rhs.y and z == rhs.z and t == rhs.t;
+}
+
+Point& Point::operator+=(const Point& rhs) {
     x += rhs.x;
     y += rhs.y;
     return *this;

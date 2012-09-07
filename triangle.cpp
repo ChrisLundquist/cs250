@@ -6,38 +6,38 @@ Triangle::Triangle(Vertex a, Vertex b, Vertex c){
     this->c = c;
 }
 
-// FIXME
 static Point cross_product(Point a, Point b) {
     Point p;
     p.x = a.y - b.y;
     p.y = b.x - a.x;
-    p.z = a.x * b.y + b.x * a.y;
+    p.z = a.x * b.y - b.x * a.y;
 
     return p;
 }
 
-// FIXME
 static float barything(Point edge, Point test) {
     return test.x * edge.x + test.y * edge.y + edge.z;
 }
 
-// FIXME
-bool Triangle::includes(Point& point) {
-    Point e1 = cross_product(b.point, c.point);
-    Point e2 = cross_product(c.point, a.point);
-    Point e3 = cross_product(a.point, b.point);
-
-    float alpha = barything(e1, point) / barything(e1, a.point);
-    float beta  = barything(e2, point) / barything(e2, b.point);
-    float gamma = barything(e3, point) / barything(e3, c.point);
-
-    return \
-        alpha > 0 and
-        beta  > 0 and
-        gamma > 0;
+float Triangle::alpha(Point& test) {
+    Point edge = cross_product(b.point, c.point);
+    return barything(edge, test) / barything(edge, a.point);
 }
 
-// FIXME
+float Triangle::beta(Point& test) {
+    Point edge = cross_product(c.point, a.point);
+    return barything(edge, test) / barything(edge, b.point);
+}
+
+float Triangle::gamma(Point& test) {
+    Point edge = cross_product(a.point, b.point);
+    return barything(edge, test) / barything(edge, c.point);
+}
+
+bool Triangle::includes(Point& point) {
+    return alpha(point) > 0 and beta(point) > 0 and gamma(point) > 0;
+}
+
 void Triangle::barycentric(FrameBuffer& buffer){
     // TODO use a bounding quad
     for(int y = 0; y < buffer.height; y++)

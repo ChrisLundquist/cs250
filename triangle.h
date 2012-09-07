@@ -8,6 +8,9 @@ struct Triangle {
     Vertex& top();
     Vertex& bottom();
     Vertex& middle();
+    float alpha(Point&);
+    float beta(Point&);
+    float gamma(Point&);
 private:
     void barycentric(FrameBuffer&);
     void scanline(FrameBuffer&);
