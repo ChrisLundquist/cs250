@@ -68,7 +68,7 @@ TEST(Triangle, DoesInclude) {
     EXPECT_TRUE(triangle.includes(good1));
     EXPECT_TRUE(triangle.includes(good2));
     EXPECT_TRUE(triangle.includes(good3));
-    //EXPECT_TRUE(triangle.includes(good4));
+    EXPECT_TRUE(triangle.includes(good4));
 }
 
 TEST(Triangle, DoesNotInclude) {

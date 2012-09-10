@@ -36,7 +36,8 @@ float Triangle::gamma(Point& test) {
 }
 
 bool Triangle::includes(Point& point) {
-    return alpha(point) >= 0 and beta(point) >= 0 and gamma(point) >= 0;
+    // Tie Breaker so alpha doesn't get an >=
+    return alpha(point) > 0 and beta(point) >= 0 and gamma(point) >= 0;
 }
 
 void Triangle::barycentric(FrameBuffer& buffer){
