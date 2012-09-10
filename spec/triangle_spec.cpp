@@ -5,16 +5,24 @@ static Color red() {
     return Color(255, 0, 0);
 }
 
+static Color green() {
+    return Color(0, 255, 0);
+}
+
+static Color blue() {
+    return Color(0, 0, 255);
+}
+
 static Vertex vertex_a() {
     return Vertex(Point(100, 0), red());
 }
 
 static Vertex vertex_b() {
-    return Vertex(Point(400, 100), red());
+    return Vertex(Point(400, 100), green());
 }
 
 static Vertex vertex_c() {
-    return Vertex(Point(200, 300), red());
+    return Vertex(Point(200, 300), blue());
 }
 
 static Triangle test_triangle() {
@@ -82,4 +90,7 @@ TEST(Triangle, DoesNotInclude) {
     EXPECT_FALSE(triangle.includes(bad2));
     EXPECT_FALSE(triangle.includes(bad3));
     EXPECT_FALSE(triangle.includes(bad4));
+}
+
+TEST(Triangle, Interpolation) {
 }

@@ -66,6 +66,10 @@ void Triangle::scanline(FrameBuffer& buffer) {
 
     std::cout << "Top:" << top.point << "Middle:" << middle.point << "Bottom:" << bottom.point << std::endl;
 
+    Line(top, middle).render(buffer);
+    Line(top, bottom).render(buffer);
+    Line(middle, bottom).render(buffer);
+
     if(top.point.y - bottom.point.y == 0)
         return; //TODO flat triangles?
 
