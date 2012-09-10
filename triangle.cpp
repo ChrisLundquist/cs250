@@ -44,10 +44,21 @@ void Triangle::barycentric(FrameBuffer& buffer){
     // TODO use a bounding quad
     for(int y = 0; y < buffer.height; y++)
         for(int x = 0; x < buffer.width; x++) {
-            Vertex point = Vertex(Point(x,y),a.color);
-            if(includes(point.point))
-                point.render(buffer);
+            Point point = Point(x, y);
+            Vertex pixel = calculate_pixel(point);
+            if(includes(pixel.point))
+                pixel.render(buffer);
         }
+}
+
+Vertex Triangle::calculate_pixel( Point& point) {
+    float alpha = this->alpha(point);
+    float beta  = this->beta(point);
+    float gamma = this->gamma(point);
+
+    Color color = a.color * alpha + b.color * beta + c.color * gamma;
+
+    return Vertex( point, color);
 }
 
 void Triangle::render(FrameBuffer& buffer) {

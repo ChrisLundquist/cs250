@@ -83,7 +83,7 @@ TEST(Triangle, DoesNotInclude) {
     Point bad1 = Point(200, 0);
     Point bad2 = Point(100, 100);
     Point bad3 = Point(400, 400);
-    Point bad4 =  Point(300, 200);
+    Point bad4 = Point(300, 200);
 
 
     EXPECT_FALSE(triangle.includes(bad1));
@@ -93,4 +93,29 @@ TEST(Triangle, DoesNotInclude) {
 }
 
 TEST(Triangle, Interpolation) {
+    Triangle triangle = test_triangle();
+    Point red   = triangle.a.point;
+    Point green = triangle.b.point;
+    Point blue  = triangle.c.point;
+
+
+    EXPECT_EQ(triangle.calculate_pixel(red).color.r, 255);
+    EXPECT_EQ(triangle.calculate_pixel(red).color.g, 0);
+    EXPECT_EQ(triangle.calculate_pixel(red).color.b, 0);
+
+    EXPECT_EQ(triangle.calculate_pixel(green).color.r, 0);
+    EXPECT_EQ(triangle.calculate_pixel(green).color.g, 255);
+    EXPECT_EQ(triangle.calculate_pixel(green).color.b, 0);
+
+    EXPECT_EQ(triangle.calculate_pixel(blue).color.r, 0);
+    EXPECT_EQ(triangle.calculate_pixel(blue).color.g, 0);
+    EXPECT_EQ(triangle.calculate_pixel(blue).color.b, 255);
+
+    Point red_green = triangle.a.point + triangle.b.point;
+    red_green.x /= 2;
+    red_green.y /= 2;
+
+    EXPECT_EQ(triangle.calculate_pixel(red_green).color.r, 127);
+    EXPECT_EQ(triangle.calculate_pixel(red_green).color.g, 127);
+    EXPECT_EQ(triangle.calculate_pixel(red_green).color.b, 0);
 }

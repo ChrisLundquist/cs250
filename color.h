@@ -3,4 +3,6 @@ struct Color {
     Color();
     Color(int,int,int);
     Color(int,int,int,int);
+    Color operator*(const float&) const;
+    Color operator+(const Color&) const;
 };

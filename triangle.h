@@ -11,6 +11,7 @@ struct Triangle {
     float alpha(Point&);
     float beta(Point&);
     float gamma(Point&);
+    Vertex calculate_pixel(Point&);
 private:
     void barycentric(FrameBuffer&);
     void scanline(FrameBuffer&);
