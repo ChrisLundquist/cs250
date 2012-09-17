@@ -40,13 +40,25 @@ Matrix4::Matrix4(f32 mm00, f32 mm01, f32 mm02, f32 mm03,
 Matrix4& Matrix4::operator=(const Matrix4& rhs) {
     for( unsigned i = 0; i < 4 * 4; i++)
         v[i] = rhs.v[i];
+    return *this;
 }
 
 // Multiplying a Matrix4 with a Vector4 or a Point4
 Vector4 Matrix4::operator*(const Vector4& rhs) const {
+    Vector4 tmp = Vector4();
+    for( unsigned i = 0; i < 4; i++)
+        for( unsigned j = 0; j < 4; j++)
+            tmp.v[i] += rhs.v[j] * m[i][j];
+    return tmp;
+
 }
 
 Point4  Matrix4::operator*(const Point4& rhs) const {
+    Point4 tmp = Point4();
+    for( unsigned i = 0; i < 4; i++)
+        for( unsigned j = 0; j < 4; j++)
+            tmp.v[i] += rhs.v[j] * m[i][j];
+    return tmp;
 }
 
 // Basic Matrix arithmetic operations
@@ -69,6 +81,13 @@ Matrix4 Matrix4::operator-(const Matrix4& rhs) const {
 }
 
 Matrix4 Matrix4::operator*(const Matrix4& rhs) const {
+    Matrix4 tmp = Matrix4();
+
+    for (unsigned i = 0; i < 4; i++)
+        for (unsigned j = 0; j < 4; j++)
+            for (unsigned k = 0; k < 4; k++)
+                tmp.m[i][j] += m[i][k] * rhs.m[k][j];
+    return tmp;
 }
 
 // Similar to the three above except they modify
@@ -88,6 +107,8 @@ Matrix4& Matrix4::operator-=(const Matrix4& rhs) {
 }
 
 Matrix4& Matrix4::operator*=(const Matrix4& rhs) {
+    *this = *this * rhs;
+    return *this;
 }
 
 // Scale/Divide the entire matrix by a float
@@ -109,11 +130,13 @@ Matrix4 Matrix4::operator/(const f32 rhs) const {
 Matrix4& Matrix4::operator*=(const f32 rhs) {
     for(unsigned i = 0; i < 4 * 4; i++)
         v[i] *= rhs;
+    return *this;
 }
 
 Matrix4& Matrix4::operator/=(const f32 rhs) {
     for(unsigned i = 0; i < 4 * 4; i++)
         v[i] /= rhs;
+    return *this;
 }
 
 // Comparison Matrix4::operators which should use an epsilon defined in

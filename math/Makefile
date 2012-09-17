@@ -15,3 +15,8 @@ all: Point4.o Vector4.o Matrix4.o Driver.o
 
 clean:
 	rm -rf *.exe *.o
+
+diff: all
+	./test.exe > test.txt
+	diff ./test.txt ./sample_output.txt
+
