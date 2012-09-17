@@ -90,8 +90,8 @@ Vector4& Vector4::operator/=(const f32 rhs) {
 // Utilities.h to see if the value is within a certain range
 // in which case we say they are equivalent.
 bool Vector4::operator==(const Vector4& rhs) const {
-    for(unsigned i = 0; i < 4; i++)
-        if(v[i] != rhs.v[i])
+    for( unsigned i = 0; i < 4; i++)
+        if( fabs(v[i] - rhs.v[i]) < EPSILON)
             return false;
     return true;
 }

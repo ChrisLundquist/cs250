@@ -70,7 +70,10 @@ Point4& Point4::operator-=(const Vector4& rhs) {
 // Utilities.h to see if the value is within a certain range
 // in which case we say they are equivalent.
 bool Point4::operator==(const Point4& rhs) const {
-    return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;
+    for( unsigned i = 0; i < 4; i++)
+        if( fabs(v[i] - rhs.v[i]) < EPSILON)
+            return false;
+    return true;
 }
 
 bool Point4::operator!=(const Point4& rhs) const {
