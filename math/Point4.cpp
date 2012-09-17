@@ -71,7 +71,7 @@ Point4& Point4::operator-=(const Vector4& rhs) {
 // in which case we say they are equivalent.
 bool Point4::operator==(const Point4& rhs) const {
     for( unsigned i = 0; i < 4; i++)
-        if( fabs(v[i] - rhs.v[i]) < EPSILON)
+        if( fabs(v[i] - rhs.v[i]) > EPSILON)
             return false;
     return true;
 }

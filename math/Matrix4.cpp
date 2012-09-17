@@ -144,7 +144,7 @@ Matrix4& Matrix4::operator/=(const f32 rhs) {
 // in which case we say they are equivalent.
 bool Matrix4::operator==(const Matrix4& rhs) const {
     for( unsigned i = 0; i < 4 * 4; i++)
-        if( fabs(v[i] - rhs.v[i]) < EPSILON)
+        if( fabs(v[i] - rhs.v[i]) > EPSILON)
             return false;
     return true;
 }

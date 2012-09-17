@@ -91,7 +91,7 @@ Vector4& Vector4::operator/=(const f32 rhs) {
 // in which case we say they are equivalent.
 bool Vector4::operator==(const Vector4& rhs) const {
     for( unsigned i = 0; i < 4; i++)
-        if( fabs(v[i] - rhs.v[i]) < EPSILON)
+        if( fabs(v[i] - rhs.v[i]) > EPSILON)
             return false;
     return true;
 }
