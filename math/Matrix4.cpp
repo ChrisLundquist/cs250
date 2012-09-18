@@ -45,7 +45,7 @@ Matrix4& Matrix4::operator=(const Matrix4& rhs) {
 
 // Multiplying a Matrix4 with a Vector4 or a Point4
 Vector4 Matrix4::operator*(const Vector4& rhs) const {
-    Vector4 tmp = Vector4();
+    Vector4 tmp = Vector4(0,0,0,0);
     for( unsigned i = 0; i < 4; i++)
         for( unsigned j = 0; j < 4; j++)
             tmp.v[i] += rhs.v[j] * m[i][j];
@@ -54,7 +54,7 @@ Vector4 Matrix4::operator*(const Vector4& rhs) const {
 }
 
 Point4  Matrix4::operator*(const Point4& rhs) const {
-    Point4 tmp = Point4();
+    Point4 tmp = Point4(0,0,0,0);
     for( unsigned i = 0; i < 4; i++)
         for( unsigned j = 0; j < 4; j++)
             tmp.v[i] += rhs.v[j] * m[i][j];

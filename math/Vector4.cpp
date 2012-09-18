@@ -97,20 +97,26 @@ bool Vector4::operator==(const Vector4& rhs) const {
 }
 
 bool Vector4::operator!=(const Vector4& rhs) const {
-    return (*this == rhs);
+    return !(*this == rhs);
 }
 
 // Computes the dot product with the other vector. Treat it as 3D vector.
 f32 Vector4::Dot(const Vector4& rhs) const {
-    return x * rhs.x + y * rhs.y + z * rhs.z + w * rhs.w;
+    return x * rhs.x +
+		   y * rhs.y + 
+		   z * rhs.z;
+	// Driver specifiies to ignore W component.
 }
 
 // Computes the cross product with the other vector. Treat it as a 3D vector.
 Vector4 Vector4::Cross(const Vector4& rhs) const {
-    float x = y * rhs.z - z * rhs.y;
-    float y = -(x * rhs.z - z * rhs.x);
-    float z = x * rhs.y - rhs.x * y;
-    return Vector4(x, y, z, 0);
+
+    return Vector4(
+		 y * rhs.z - z * rhs.y,
+		  z * rhs.x - x * rhs.z,
+		  x * rhs.y - y * rhs.x,
+		  0
+		);
 }
 
 // Computes the true length of the vector
