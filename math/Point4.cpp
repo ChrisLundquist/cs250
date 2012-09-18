@@ -42,7 +42,7 @@ Vector4 Point4::operator-(const Point4&  rhs) const {
 // Basic vector math operations with points, you can add a Vector4 to a Point4, or subtract
 // a Vector4 from a Point4
 Point4  Point4::operator+ (const Vector4& rhs) const {
-    return Point4(x - rhs.x, y - rhs.y, z - rhs.z, w - rhs.w);
+    return Point4(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w);
 }
 
 Point4  Point4::operator- (const Vector4& rhs) const {
