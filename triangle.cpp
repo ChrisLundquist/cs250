@@ -1,3 +1,4 @@
+#include <iostream>
 #include "triangle.h"
 
 Triangle::Triangle(Vertex a, Vertex b, Vertex c){
@@ -56,7 +57,7 @@ Vertex Triangle::calculate_pixel( Point& point) {
     float beta  = this->beta(point);
     float gamma = this->gamma(point);
 
-    Color color = a.color * alpha + b.color * beta + c.color * gamma;
+    Vector color = a.color * alpha + b.color * beta + c.color * gamma;
 
     return Vertex( point, color);
 }
@@ -75,7 +76,7 @@ void Triangle::scanline(FrameBuffer& buffer) {
     left   = top;
     right  = top;
 
-    std::cout << "Top:" << top.point << "Middle:" << middle.point << "Bottom:" << bottom.point << std::endl;
+    //std::cout << "Top:" << top.point << "Middle:" << middle.point << "Bottom:" << bottom.point << std::endl;
 
     Line(top, middle).render(buffer);
     Line(top, bottom).render(buffer);

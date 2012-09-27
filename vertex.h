@@ -1,11 +1,10 @@
-#include "color.h"
-#include "point.h"
+#include "math.h"
 #include "frame_buffer.h"
 
 struct Vertex {
     Vertex();
-    Vertex(Point, Color);
-    Color color;
+    Vertex(Point, Vector);
     Point point;
+    Vector color;
     void render(FrameBuffer&);
 };

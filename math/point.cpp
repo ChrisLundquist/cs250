@@ -1,4 +1,4 @@
-#include "Point4.h"
+#include "point.h"
 
 Point4::Point4(void) {
     Zero();

@@ -1,3 +1,4 @@
+#include "frame_buffer.h"
 #include "vertex.h"
 
 struct Line {

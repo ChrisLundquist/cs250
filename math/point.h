@@ -6,7 +6,7 @@
 // DO NOT MODIFY THIS FILE FOR ASSIGNMENT 1
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "Vector4.h"
+#include "vector.h"
 //struct Vector4;
 
 struct Point4
@@ -41,7 +41,7 @@ struct Point4
     Point4(const Point4& rhs);
 
     // Non-Default constructor, self-explanatory
-    Point4(f32 xx, f32 yy, f32 zz, f32 ww = 1.0f);
+    Point4(f32 xx, f32 yy = 0, f32 zz = 0, f32 ww = 1.0f);
 
     // Assignment operator, copies every component from the other Point4
     Point4& operator=(const Point4& rhs);

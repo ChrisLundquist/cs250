@@ -1,16 +1,16 @@
 #include <gtest/gtest.h>
 #include "../triangle.h"
 
-static Color red() {
-    return Color(255, 0, 0);
+static Vector red() {
+    return Vector(255, 0, 0);
 }
 
-static Color green() {
-    return Color(0, 255, 0);
+static Vector green() {
+    return Vector(0, 255, 0);
 }
 
-static Color blue() {
-    return Color(0, 0, 255);
+static Vector blue() {
+    return Vector(0, 0, 255);
 }
 
 static Vertex vertex_a() {
@@ -111,11 +111,15 @@ TEST(Triangle, Interpolation) {
     EXPECT_EQ(triangle.calculate_pixel(blue).color.g, 0);
     EXPECT_EQ(triangle.calculate_pixel(blue).color.b, 255);
 
-    Point red_green = triangle.a.point + triangle.b.point;
+    Point red_green = triangle.a.point;
+    red_green.x += triangle.b.point.x;
     red_green.x /= 2;
+    red_green.y += triangle.b.point.y;
     red_green.y /= 2;
+    red_green.z += triangle.b.point.z;
+    red_green.z /= 2;
 
-    EXPECT_EQ(triangle.calculate_pixel(red_green).color.r, 127);
-    EXPECT_EQ(triangle.calculate_pixel(red_green).color.g, 127);
+    EXPECT_EQ(triangle.calculate_pixel(red_green).color.r, 127.5);
+    EXPECT_EQ(triangle.calculate_pixel(red_green).color.g, 127.5);
     EXPECT_EQ(triangle.calculate_pixel(red_green).color.b, 0);
 }

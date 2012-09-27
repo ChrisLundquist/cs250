@@ -10,7 +10,7 @@ test: all
 	$(CXX) -c $(STANDARD) $(CFLAGS) $< -o $@
 
 
-all: Point4.o Vector4.o Matrix4.o Driver.o
+all: point.o vector.o matrix.o Driver.o
 	$(CXX) $(CFLAGS) *.o -o test.exe
 
 clean:

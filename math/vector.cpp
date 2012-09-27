@@ -1,4 +1,4 @@
-#include "Vector4.h"
+#include "vector.h"
 
 Vector4::Vector4(void) {
     Zero();
@@ -103,7 +103,7 @@ bool Vector4::operator!=(const Vector4& rhs) const {
 // Computes the dot product with the other vector. Treat it as 3D vector.
 f32 Vector4::Dot(const Vector4& rhs) const {
     return x * rhs.x +
-		   y * rhs.y + 
+		   y * rhs.y +
 		   z * rhs.z;
 	// Driver specifiies to ignore W component.
 }

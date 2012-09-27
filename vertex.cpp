@@ -1,11 +1,11 @@
 #include "vertex.h"
 
 Vertex::Vertex(){
-    color = Color();
+    color = Vector();
     point = Point();
 }
 
-Vertex::Vertex(Point point, Color color) {
+Vertex::Vertex(Point point, Vector color) {
     this->point = point;
     this->color = color;
 }

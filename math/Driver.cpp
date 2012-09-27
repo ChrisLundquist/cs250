@@ -1,7 +1,7 @@
 
-#include "Vector4.h"
-#include "Point4.h"
-#include "Matrix4.h"
+#include "vector.h"
+#include "point.h"
+#include "matrix.h"
 
 void Vector4Test(void);
 void Point4Test(void);

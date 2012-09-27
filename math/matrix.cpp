@@ -1,4 +1,4 @@
-#include "Matrix4.h"
+#include "matrix.h"
 
 Matrix4::Matrix4(void) {
     Zero();

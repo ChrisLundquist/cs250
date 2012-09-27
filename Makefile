@@ -1,18 +1,19 @@
 #VPATH= src:test
-CFLAGS= -Wall -Wextra -pedantic -g
+CFLAGS= -Wall -Wextra
 CXX=g++
 TEST_LIBS=-lgtest -lgtest_main
 LIBS= -lGLEW
 FRAMEWORKS = -framework GLUT -framework OpenGL
-OBJECT_FILES =  frame_buffer.o vertex.o color.o point.o line.o triangle.o
+OBJECT_FILES =  frame_buffer.o vertex.o line.o triangle.o math/point.o math/vector.o math/matrix.o
 OBJECT_SPEC_FILES = spec/*.o
 APP = Assignment
+STANDARD = -std=c++98
 # spec/views/*.o src/controllers/*.o src/views/*.o
 
 
 test: all model_specs
 	rm -f ./tests
-	$(CXX) -g $(OBJECT_FILES) $(OBJECT_SPEC_FILES) $(TEST_LIBS) $(FRAMEWORKS) $(LIBS) -o tests
+	$(CXX) -g $(STANDARD) $(OBJECT_FILES) $(OBJECT_SPEC_FILES) $(TEST_LIBS) $(FRAMEWORKS) $(LIBS) -o tests
 	./tests
 
 model_specs: spec/triangle_spec.o
@@ -34,5 +35,5 @@ clean:
 	rm -rf main.o $(OBJECT_FILES) $(OBJECT_SPEC_FILES) $(APP) tests
 
 .cpp.o:
-	$(CXX) -c $(CFLAGS) $< -o $@
+	$(CXX) -c $(STANDARD) $(CFLAGS) $< -o $@
 
