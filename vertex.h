@@ -6,5 +6,7 @@ struct Vertex {
     Vertex(Point, Vector);
     Point point;
     Vector color;
+    Vector normal;
+    Vector u,v;
     void render(FrameBuffer&);
 };
