@@ -5,7 +5,7 @@ TEST_LIBS=-lgtest -lgtest_main
 LIBS= -lGLEW
 FRAMEWORKS = -framework GLUT -framework OpenGL
 OBJECT_FILES =  frame_buffer.o vertex.o line.o triangle.o math/point.o math/vector.o math/matrix.o
-OBJECT_SPEC_FILES = spec/*.o
+OBJECT_SPEC_FILES = spec/*.o spec/math/*.o
 APP = Assignment
 STANDARD = -std=c++98
 # spec/views/*.o src/controllers/*.o src/views/*.o
@@ -16,7 +16,7 @@ test: all model_specs
 	$(CXX) -g $(STANDARD) $(OBJECT_FILES) $(OBJECT_SPEC_FILES) $(TEST_LIBS) $(FRAMEWORKS) $(LIBS) -o tests
 	./tests
 
-model_specs: spec/triangle_spec.o
+model_specs: spec/triangle_spec.o spec/math/point_spec.o
 
 #valgrind: test
 #	valgrind --leak-check=yes ./tests
