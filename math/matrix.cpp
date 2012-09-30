@@ -163,7 +163,7 @@ void Matrix4::Zero(void) {
 void Matrix4::Identity(void) {
     for( unsigned i = 0; i < 4; i++)
         for( unsigned j = 0; j < 4; j++)
-            m[i][j] = i == j;
+            m[i][j] = !(i^j);
 }
 
 

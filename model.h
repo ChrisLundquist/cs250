@@ -1,6 +1,6 @@
 #include <vector>
 #include "math.h"
-#include "faces.h"
+#include "face.h"
 
 class Model {
     public:
@@ -11,10 +11,14 @@ class Model {
     float scale_x();
     float scale_y();
     float scale_z();
+    Matrix get_transform();
+    Matrix get_scale_matrix();
+    Matrix get_rotation_matrix();
+    Matrix get_translation_matrix();
 
     private:
     Vector scale;
     Vector rotation;
     Vector translation;
-    std::vector<Faces> faces;
+    std::vector<Face> faces;
 };
