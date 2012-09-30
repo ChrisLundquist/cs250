@@ -17,7 +17,7 @@ TEST(Parser,Load) {
     // TODO move to Vertex0
     std::vector<Vertex> vertexes = p.get_vertexes();
 
-    Vertex first = vertexes[0];
+    Vertex first = vertexes.front();
     EXPECT_EQ(first.x(), -0.5f);
     EXPECT_EQ(first.y(), -0.5f);
     EXPECT_EQ(first.z(), 0.5f);
@@ -29,6 +29,24 @@ TEST(Parser,Load) {
     EXPECT_EQ(last.y(), 0.5f);
     EXPECT_EQ(last.z(), -0.5f);
     EXPECT_EQ(last.w(), 1.0f);
+
+    // TODO move to Face0
+    std::vector<Face> faces = p.get_faces();
+
+    Face first_face = faces.front();
+    EXPECT_EQ(first_face.a.x(), vertexes[0].x());
+    EXPECT_EQ(first_face.a.y(), vertexes[0].y());
+    EXPECT_EQ(first_face.a.z(), vertexes[0].z());
+
+    EXPECT_EQ(first_face.b.x(), vertexes[1].x());
+    EXPECT_EQ(first_face.b.y(), vertexes[1].y());
+    EXPECT_EQ(first_face.b.z(), vertexes[1].z());
+
+    EXPECT_EQ(first_face.c.x(), vertexes[2].x());
+    EXPECT_EQ(first_face.c.y(), vertexes[2].y());
+    EXPECT_EQ(first_face.c.z(), vertexes[2].z());
+
+    // TODO move to FaceN
 }
 
 TEST(Parser, Camera) {
