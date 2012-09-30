@@ -10,7 +10,6 @@
 #define FACECOLOR "facecolor"
 #define TEXTURE_COORDINATES "texturecoordinates"
 
-// DOS line endings were breaking things
 
 Parser::Parser(char* filename) {
     camera = Camera();
@@ -28,6 +27,11 @@ std::vector<Face> Parser::get_faces() {
     return faces;
 }
 
+std::vector<Vertex> Parser::get_vertexes() {
+    return vertexes;
+}
+
+// DOS line endings were breaking things
 inline static std::string chomp(std::string string) {
     return string.substr(0,string.find("\r"));
 }
@@ -78,7 +82,7 @@ static bool block_close(std::string& line) {
  * far = 500
  * }
  */
-void Parser::parse_camera(std::ifstream& data) {
+void Parser::parse_camera(std::istream& data) {
     std::string line = std::string();
     float left = 0;
     float right = 0;
@@ -140,7 +144,7 @@ void Parser::parse_camera(std::ifstream& data) {
  *-0.5,+0.5,-0.5,1.0
  *}
  */
-void Parser::parse_vertexes(std::ifstream& data) {
+void Parser::parse_vertexes(std::istream& data) {
     int count = 0;
     float x = 0;
     float y = 0;
@@ -199,7 +203,7 @@ void Parser::parse_vertexes(std::ifstream& data) {
  * 4,1,0
  * }
  */
-void Parser::parse_faces(std::ifstream& data) {
+void Parser::parse_faces(std::istream& data) {
     int id_a, id_b, id_c;
 
     std::string line = std::string();
@@ -213,11 +217,23 @@ void Parser::parse_faces(std::ifstream& data) {
         return;
     }
 
+    // TODO face count
+    getline(data, line);
+    // Skip past it for now
+
+    getline(data, line);
     while(! block_close(line)) {
-        getline(data, line);
+
+        if(DEBUG)
+            std::cout << line << std::endl;
+
         sscanf(line.c_str(), "%d,%d,%d", &id_a, &id_b, &id_c);
+
+        if(DEBUG)
+            std::cout << "A: " << id_a << " B: " << id_b << " C: " << id_c << std::endl;
         Face face = Face(vertexes[id_a], vertexes[id_b], vertexes[id_c]);
         faces.push_back(face);
+        getline(data, line);
     }
 }
 
@@ -237,7 +253,7 @@ void Parser::parse_faces(std::ifstream& data) {
  * 255,255,0
  * }
  */
-void Parser::parse_face_colors(std::ifstream& data) {
+void Parser::parse_face_colors(std::istream& data) {
     int i = 0;
     int r,g,b;
     std::string line = std::string();
@@ -270,7 +286,7 @@ void Parser::parse_face_colors(std::ifstream& data) {
 }
 
 // TODO
-void Parser::parse_texture_coordinates(std::ifstream& data) {
+void Parser::parse_texture_coordinates(std::istream& data) {
     std::string line = std::string();
     if(DEBUG)
         std::cout << "Parsing texture coordinates" << std::endl;

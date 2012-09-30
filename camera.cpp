@@ -45,3 +45,31 @@ Camera& Camera::set_focal(float focal) {
     this->focal = focal;
     return *this;
 }
+
+float Camera::get_top() {
+    return top;
+}
+
+float Camera::get_bottom() {
+    return bottom;
+}
+
+float Camera::get_left() {
+    return left;
+}
+
+float Camera::get_right() {
+    return right;
+}
+
+float Camera::get_near() {
+    return near;
+}
+
+float Camera::get_far() {
+    return far;
+}
+
+float Camera::get_focal() {
+    return focal;
+}
