@@ -58,8 +58,9 @@ static bool block_close(std::string& line) {
  * near = 36
  * far = 500
  * }
-*/
+ */
 void Parser::parse_camera(std::ifstream& data) {
+    std::string line = std::string();
     float left = 0;
     float right = 0;
     float top = 0;
@@ -68,9 +69,7 @@ void Parser::parse_camera(std::ifstream& data) {
     float near = 0;
     float far = 0;
 
-
     std::cout << "Parsing camera" << std::endl;
-    std::string line = std::string();
 
     getline(data, line);
     line = chomp(line);
@@ -108,21 +107,103 @@ void Parser::parse_camera(std::ifstream& data) {
     camera.set_far(far);
     camera.set_focal(focal);
 }
-
+/* Looks like:
+ *{
+ *count = 8
+ *-0.5,-0.5,+0.5,1.0
+ *+0.5,-0.5,+0.5,1.0
+ *+0.5,+0.5,+0.5,1.0
+ *-0.5,+0.5,+0.5,1.0
+ *-0.5,-0.5,-0.5,1.0
+ *+0.5,-0.5,-0.5,1.0
+ *+0.5,+0.5,-0.5,1.0
+ *-0.5,+0.5,-0.5,1.0
+ *}
+*/
 void Parser::parse_vertexes(std::ifstream& data) {
+    int count = 0;
+    float x = 0;
+    float y = 0;
+    float z = 0;
+    float w = 0;
+
+    std::string line = std::string();
+
     std::cout << "Parsing vertexes" << std::endl;
+
+    getline(data, line);
+    line = chomp(line);
+
+    if( block_open(line) == false) {
+        std::cerr << "Error: Did not receive block open" << std::endl;
+        return;
+    }
+
+    getline(data, line);
+    line = chomp(line);
+
+    sscanf(line.c_str(), "%*s %*s %d", &count);
+    std::cout << count << std::endl;
+    vertexes.reserve(count);
+
+    getline(data, line);
+    while(! block_close(line)) {
+        Vertex v = Vertex();
+        std::cout << line << std::endl;
+        sscanf(line.c_str(),"%f,%f,%f,%f",&x, &y, &z, &w);
+        std::cout << "X: " << x << "Y: " << y << "Z: " << z << "W: " << w << std::endl;
+        v.point = Point(x,y,z,w);
+        vertexes.push_back(v);
+        getline(data, line);
+    }
 }
 
 void Parser::parse_faces(std::ifstream& data) {
+    std::string line = std::string();
     std::cout << "Parsing faces" << std::endl;
+    getline(data, line);
+    line = chomp(line);
+
+    if( block_open(line) == false) {
+        std::cerr << "Error: Did not receive block open" << std::endl;
+        return;
+    }
+
+    while(! block_close(line)) {
+        getline(data, line);
+    }
 }
 
 void Parser::parse_face_colors(std::ifstream& data) {
+    std::string line = std::string();
     std::cout << "Parsing face colors" << std::endl;
+    getline(data, line);
+    line = chomp(line);
+
+    if( block_open(line) == false) {
+        std::cerr << "Error: Did not receive block open" << std::endl;
+        return;
+    }
+
+    while(! block_close(line)) {
+        getline(data, line);
+    }
 }
 
 void Parser::parse_texture_coordinates(std::ifstream& data) {
+    std::string line = std::string();
     std::cout << "Parsing texture coordinates" << std::endl;
+    getline(data, line);
+    line = chomp(line);
+
+    if( block_open(line) == false) {
+        std::cerr << "Error: Did not receive block open" << std::endl;
+        return;
+    }
+
+    while(! block_close(line)) {
+        getline(data, line);
+    }
 }
 
 Parser::Parser(char* filename) {
