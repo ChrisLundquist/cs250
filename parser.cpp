@@ -37,8 +37,76 @@ void Parser::parse_data(const char *fileName) {
     }
 }
 
+static bool block_open(std::string& line) {
+    line = chomp(line);
+    return line.compare("{") == 0;
+}
+
+static bool block_close(std::string& line) {
+    line = chomp(line);
+    return line.compare("}") == 0;
+}
+
+
+/* Looks like:
+ *{
+ * left = -16.0
+ * right = 16.0
+ * top = 12.0
+ * bottom = -12.0
+ * focal = 24
+ * near = 36
+ * far = 500
+ * }
+*/
 void Parser::parse_camera(std::ifstream& data) {
+    float left = 0;
+    float right = 0;
+    float top = 0;
+    float bottom = 0;
+    float focal = 0;
+    float near = 0;
+    float far = 0;
+
+
     std::cout << "Parsing camera" << std::endl;
+    std::string line = std::string();
+
+    getline(data, line);
+    line = chomp(line);
+
+    if( block_open(line) == false) {
+        std::cerr << "Error: Did not receive block open" << std::endl;
+        return;
+    }
+
+    //TODO make me more robust so things can be in any order
+    getline(data, line);
+    sscanf(line.c_str(), "%*s %*s %f", &left);
+    getline(data, line);
+    sscanf(line.c_str(), "%*s %*s %f", &right);
+    getline(data, line);
+    sscanf(line.c_str(), "%*s %*s %f", &top);
+    getline(data, line);
+    sscanf(line.c_str(), "%*s %*s %f", &bottom);
+    getline(data, line);
+    sscanf(line.c_str(), "%*s %*s %f", &focal);
+    getline(data, line);
+    sscanf(line.c_str(), "%*s %*s %f", &near);
+    getline(data, line);
+    sscanf(line.c_str(), "%*s %*s %f", &far);
+
+    while(! block_close(line)) {
+        getline(data, line);
+    }
+
+    camera.set_top(top);
+    camera.set_bottom(bottom);
+    camera.set_left(left);
+    camera.set_right(right);
+    camera.set_near(near);
+    camera.set_far(far);
+    camera.set_focal(focal);
 }
 
 void Parser::parse_vertexes(std::ifstream& data) {
