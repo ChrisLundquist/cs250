@@ -1,24 +1,13 @@
 #include <vector>
-#include "math.h"
+#include "transformation.h"
 #include "face.h"
 
 class Model {
     public:
     Model();
-    Model& set_scale(float, float, float);
-    Model& set_rotation(float, float, float);
-    Model& set_translation(float, float, float);
-    float scale_x();
-    float scale_y();
-    float scale_z();
-    Matrix get_transform();
-    Matrix get_scale_matrix();
-    Matrix get_rotation_matrix();
-    Matrix get_translation_matrix();
+    Transformation& get_transform();
 
     private:
-    Vector scale;
-    Vector rotation;
-    Vector translation;
+    Transformation transformation;
     std::vector<Face> faces;
 };
