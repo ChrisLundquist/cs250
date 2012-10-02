@@ -15,15 +15,15 @@ Matrix Camera::get_projection() {
     Matrix projection = Matrix();
 
     projection.m[0][0] = 2.0f * near / (right - left);
-    projection.m[2][0] = (right + left) / (right - left);
+    projection.m[0][2] = (right + left) / (right - left);
 
     projection.m[1][1] = 2.0f * near / (top - bottom);
-    projection.m[2][1] = (top + bottom) / ( top - bottom);
+    projection.m[1][2] = (top + bottom) / ( top - bottom);
 
     projection.m[2][2] =  -( far + near)/ ( far - near);
-    projection.m[3][2] = (-2.0f * far * near) / (far - near);
+    projection.m[2][3] = (-2.0f * far * near) / (far - near);
 
-    projection.m[2][3] = -1;
+    projection.m[3][2] = -1;
 
     return projection;
 }

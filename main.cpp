@@ -55,10 +55,10 @@ void render(void)
     VP.push(camera.get_projection());
     frame.Clear(255, 255, 255);
 
-    tank.render(frame, VP);
+    //tank.render(frame, VP);
 
     glDrawPixels(WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, frame.buffer);
-    glutSwapBuffers();
+    //glutSwapBuffers();
 }
 
 void init(void)

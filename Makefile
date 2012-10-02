@@ -16,7 +16,13 @@ test: all model_specs
 	$(CXX) -g $(STANDARD) $(OBJECT_FILES) $(OBJECT_SPEC_FILES) $(TEST_LIBS) $(FRAMEWORKS) $(LIBS) -o tests
 	./tests
 
-model_specs: spec/triangle_spec.o spec/math/point_spec.o spec/parser_spec.o spec/model_spec.o spec/transformation_spec.o
+model_specs: spec/triangle_spec.o \
+	spec/math/point_spec.o \
+	spec/parser_spec.o \
+	spec/model_spec.o \
+	spec/transformation_spec.o \
+	spec/camera_spec.o
+
 
 
 #valgrind: test

@@ -51,7 +51,8 @@ void Parser::parse_data(const char *fileName) {
             } else if ( line.compare(FACES) == 0) {
                 parse_faces(file);
             } else if ( line.compare(FACECOLOR) == 0) {
-                parse_face_colors(file);
+                //FIXME
+                //parse_face_colors(file);
             } else if ( line.compare(TEXTURE_COORDINATES) == 0) {
                 parse_texture_coordinates(file);
             }

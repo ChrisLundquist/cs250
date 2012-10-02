@@ -48,7 +48,7 @@ void Model::render(FrameBuffer& buffer,Transformation& transform) {
     Matrix MVP = transform.transform();
 
     for(unsigned i = 0; i < faces.size(); i++) {
-
+        faces[i].render(buffer);
     }
 
     for(unsigned i = 0; i < children.size(); i++)
