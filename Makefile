@@ -4,7 +4,7 @@ CXX=g++
 TEST_LIBS=-lgtest -lgtest_main
 LIBS= -lGLEW
 FRAMEWORKS = -framework GLUT -framework OpenGL
-OBJECT_FILES =  frame_buffer.o vertex.o line.o triangle.o math/point.o math/vector.o math/matrix.o camera.o face.o parser.o model.o transformation.o
+OBJECT_FILES =  frame_buffer.o vertex.o line.o triangle.o math/point.o math/vector.o math/matrix.o camera.o parser.o model.o transformation.o
 OBJECT_SPEC_FILES = spec/*.o spec/math/*.o
 APP = Assignment
 STANDARD = -std=c++98

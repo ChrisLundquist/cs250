@@ -1,7 +1,6 @@
-#include "vertex.h"
+#pragma once
 
-class Face {
-    public:
-        Face(Vertex,Vertex,Vertex);
-  Vertex a,b,c;
-};
+#include "triangle.h"
+
+typedef Triangle Face;
+

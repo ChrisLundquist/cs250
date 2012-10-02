@@ -1,3 +1,4 @@
+#include "math.h"
 class Camera {
     public:
     Camera();
@@ -16,6 +17,7 @@ class Camera {
     float get_near();
     float get_far();
     float get_focal();
+    Matrix get_projection();
     private:
     float top;
     float bottom;
